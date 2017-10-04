@@ -1,0 +1,12 @@
+#!/bin/bash
+
+export APK=airplane
+export VER=1.0.0
+export ANDROID_HOME=/home/dz/prg/android-sdk-linux_x86
+
+
+mvn -Dmaven.test.skip=true compile android:dex android:apk jarsigner:sign 
+
+
+mv target/$APK-$VER.apk target/$APK-$VER-.apk
+$ANDROID_HOME/build-tools/20.0.0/zipalign -f -v 4 target/$APK-$VER-.apk target/$APK-$VER.apk 
